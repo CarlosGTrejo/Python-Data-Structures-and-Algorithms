@@ -1,11 +1,14 @@
+# flake8: noqa
 import pytest
 
 import stack
 
+s = None
 
 def setup_function(function):
     global s
     s = stack.Stack()
+
 
 def test_push():
     """Test push() items."""
@@ -14,10 +17,12 @@ def test_push():
         s.push(item)
     assert s.size == len(items)
 
+
 def test_push_missing_item():
     """Test push() without passing item."""
     with pytest.raises(TypeError):
         s.push()
+
 
 def test_peek():
     """Test peek() with items."""
@@ -25,15 +30,18 @@ def test_peek():
     s.push('a')
     assert s.peek() == 'a'
 
+
 def test_peek_empty():
     """Test peek() when stack is empty."""
     assert s.peek() == None
+
 
 def test_pop_empty():
     """Test pop() when stack is empty."""
     assert s.size == 0
     with pytest.raises(IndexError):
         s.pop()
+
 
 def test_pop():
     """Test pop() with items in stack."""
@@ -42,9 +50,11 @@ def test_pop():
     for c in 'cba':
         assert s.pop() == c
 
+
 def test_get_stack_empty():
     """Test get_stack() on empty stack."""
     assert s.get_stack() == []
+
 
 def test_get_stack():
     """Test get_stack() on stack w/ items."""
@@ -53,25 +63,30 @@ def test_get_stack():
     else:
         assert s.get_stack() == list('abc')
 
+
 def test_is_empty_empty():
     """Test is_empty() on empty stack."""
     assert s.is_empty() == True
+
 
 def test_is_empty():
     """Test is_empty() on stack w/ items."""
     s.push('a')
     assert s.is_empty() == False
 
+
 def test_clear_empty():
     """Test clear() on empty stack."""
     s.clear()
     assert s.items == []
+
 
 def test_clear():
     """Test clear() on stack w/ items."""
     s.push('a')
     s.clear()
     assert s.is_empty() == True
+
 
 def test_len():
     """Test len() on stack."""
@@ -80,9 +95,11 @@ def test_len():
     else:
         assert len(s) == 3
 
+
 def test_len_empty():
     """Test len_empty() on empty stack."""
     assert len(s) == 0
+
 
 def teardown_function(function):
     global s
