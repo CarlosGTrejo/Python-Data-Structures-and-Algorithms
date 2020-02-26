@@ -82,10 +82,8 @@ class LinkedList:
 
     def __contains__(self, item):
         for node in self:
-            if (node == item) or (node.data == item):
+            if item in (node, node.data):
                 return True
-        else:
-            return False
 
     def append(self, data) -> None:
         """Adds (appends) a node to the end of the list."""
