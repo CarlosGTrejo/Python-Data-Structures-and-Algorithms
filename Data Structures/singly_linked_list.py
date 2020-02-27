@@ -1,8 +1,8 @@
 class Node:
     __slots__ = ("data", "next")
 
-    def __init__(self, data: object, next: "Node" = None):
-        self.data, self.next = data, next
+    def __init__(self, data: object, _next: "Node" = None):
+        self.data, self.next = data, _next
 
     def __repr__(self):
         return repr((self.data))
@@ -84,6 +84,7 @@ class LinkedList:
         for node in self:
             if item in (node, node.data):
                 return True
+        return False
 
     def append(self, data) -> None:
         """Adds (appends) a node to the end of the list."""
@@ -98,7 +99,7 @@ class LinkedList:
 
     def prepend(self, data) -> None:
         """Adds a node to the beginning of the list (prepend)."""
-        self.head = Node(data, next=self.head)
+        self.head = Node(data, _next=self.head)
         self.length += 1
 
     def append_at_node(self, node: Node, data):
@@ -109,7 +110,7 @@ class LinkedList:
         if node not in self:
             raise KeyError("Node not in linked list.")
 
-        node.next = Node(data, next=node.next)
+        node.next = Node(data, _next=node.next)
         self.length += 1
 
     def insert_at_index(self, index: int, data) -> None:
@@ -135,7 +136,7 @@ class LinkedList:
                 node_index += 1
 
             # Node indexes matched, so insert node
-            last_node.next = Node(data, next=node)
+            last_node.next = Node(data, _next=node)
             self.length += 1
 
     def remove_node(self, data) -> None:
